@@ -49,7 +49,7 @@ jobs:
           echo "name=${NAME}" >> $GITHUB_OUTPUT
       - name: Download json output
         id: download-artifact
-        uses: dawidd6/action-download-artifact@v2 # TODO: pin
+        uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e # v2.28.0
         with:
           workflow: gateway-conformance.yml
           workflow_conclusion: "completed" # TODO: ideally we could request success|failure (https://github.com/dawidd6/action-download-artifact#usage)
@@ -58,6 +58,7 @@ jobs:
           name: gateway-conformance.json
           repo: ${{ matrix.target }}
           if_no_artifact_found: fail
+          allow-forks: false
       - name: Upload JSON output
         if: (failure() || success())
         uses: actions/upload-artifact@v3
